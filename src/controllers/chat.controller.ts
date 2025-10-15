@@ -12,9 +12,10 @@ class ChatController {
 
     createMessage = async (request: Request, response: Response): Promise<void> => {
 
-        let url = atob(request.headers.urlApi as string)
+        let url = atob((request.headers.urlapi || '') as string)
+        const sub = request.headers.sub as string
 
-        const res = await this.chatService.createMessage(request.body, url)
+        const res = await this.chatService.createMessage(request.body, url, sub)
 
         response.send(res).status(201)
     }

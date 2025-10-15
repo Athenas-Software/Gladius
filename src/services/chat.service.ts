@@ -1,10 +1,14 @@
 import axios from "axios"
-import { IChatDTO } from "../interfaces/Chat"
+import { IChat, IChatDTO } from "../interfaces/Chat"
+import { createApiClient } from "../api"
 
-class ChatService {
+class ChatService implements IChat {
 
-    createMessage = async (data: IChatDTO, baseUrl: string): Promise<number> => {
-        return await axios.post(`${baseUrl}/Tarefas/Chat/message`, data)
+    createMessage = async (data: IChatDTO, baseUrl: string, sub: string): Promise<number> => {
+
+        const request = createApiClient(baseUrl, sub)
+
+        return request.post('Tarefas/Chat/message', data)
     }
 
 }
