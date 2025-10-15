@@ -6,12 +6,24 @@ import "reflect-metadata";
 import { warning } from './middlewares/error.middleware';
 import './shared/container'
 import { router } from './routes';
+import cors from 'cors'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const httpServer = createServer(app);
 
 initSockets(httpServer)
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || origin.endsWith(`.${process.env.DOMAIN}`) || origin === process.env.DOMAIN || origin === 'http://localhost') {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
+
 
 app.use(express.json());
 process.env.TZ = "America/Sao_Paulo";
@@ -21,6 +33,6 @@ app.use(express.json({ limit: "50mb" }))
 app.use(router)
 app.use(warning)
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

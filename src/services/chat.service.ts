@@ -11,7 +11,7 @@ class ChatService implements IChat {
         try {
             const request = createApiClient(baseUrl, sub)
 
-            request.post('Tarefas/Chat/message', data)
+            await request.post('Tarefas/Chat/message', data)
 
             io.emit('chat_message', data)
         } catch (error) {
