@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/server.ts"
+    "dev": "nodemon ./src/server.ts",
+    "dev:debug": "nodemon --exec \"node --inspect=0.0.0.0:9229 --require ts-node/register\" ./src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "start:debug": "node --inspect=0.0.0.0:9229 dist/server.js"
   },
   "keywords": [],
   "author": "",

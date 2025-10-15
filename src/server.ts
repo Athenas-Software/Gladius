@@ -16,13 +16,13 @@ const httpServer = createServer(app);
 initSockets(httpServer)
 
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || origin.endsWith(`.${process.env.DOMAIN}`) || origin === process.env.DOMAIN || origin === 'http://localhost') {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
+  origin: (origin, callback) => {
+    if (!origin || origin.endsWith(`.${process.env.DOMAIN}`) || origin === process.env.DOMAIN || origin === 'http://localhost') {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
     }
+  }
 }));
 
 
@@ -35,5 +35,5 @@ app.use(router)
 app.use(warning)
 
 httpServer.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
