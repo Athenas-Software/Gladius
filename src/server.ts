@@ -1,7 +1,7 @@
 import express from 'express';
 import "dotenv/config"
 import { createServer } from 'http';
-import { initSockets } from './socket/socket';
+import { initSockets } from './socket';
 import "reflect-metadata";
 import { warning } from './middlewares/error.middleware';
 import './shared/container'

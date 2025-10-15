@@ -1,14 +1,22 @@
-import axios from "axios"
 import { IChat, IChatDTO } from "../interfaces/Chat"
 import { createApiClient } from "../api"
+import { io } from "../socket"
+import { Warning } from "../errors"
+import { chatMessageErrors } from "../shared/helper/error.messages"
 
 class ChatService implements IChat {
 
-    createMessage = async (data: IChatDTO, baseUrl: string, sub: string): Promise<number> => {
+    createMessage = async (data: IChatDTO, baseUrl: string, sub: string): Promise<void> => {
 
-        const request = createApiClient(baseUrl, sub)
+        try {
+            const request = createApiClient(baseUrl, sub)
 
-        return request.post('Tarefas/Chat/message', data)
+            request.post('Tarefas/Chat/message', data)
+
+            io.emit('chat_message', data)
+        } catch (error) {
+            throw new Warning(chatMessageErrors['MESSAGE_NOT_SEND'], 400);
+        }
     }
 
 }

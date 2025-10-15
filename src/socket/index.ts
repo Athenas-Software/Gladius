@@ -1,8 +1,10 @@
 import { Server } from 'socket.io';
 import { createServer } from 'http';
 
+export var io: Server
+
 export function initSockets(httpServer: ReturnType<typeof createServer>) {
-    const io = new Server(httpServer, {
+    io = new Server(httpServer, {
         cors: {
             origin: "*",
             methods: ["GET", "POST"]
@@ -10,11 +12,6 @@ export function initSockets(httpServer: ReturnType<typeof createServer>) {
     });
 
     io.on("connection", (socket) => {
-        console.log(`User connected: ${socket.id}`);
-
-        socket.on("chat_message", (msg) => {
-            // io.emit("chat_message", msg);
-        });
 
         socket.on("disconnect", () => {
             console.log(`User disconnected: ${socket.id}`);

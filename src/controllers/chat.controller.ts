@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe"
 import { ChatService } from "../services/chat.service"
 import { Request, Response } from "express"
+import { io } from "../socket"
 
 @injectable()
 class ChatController {
