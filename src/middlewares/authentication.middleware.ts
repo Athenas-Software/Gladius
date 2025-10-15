@@ -1,51 +1,35 @@
-import { Request, Response, NextFunction } from "express"
+import { Request, Response, NextFunction } from "express";
 
 const authenticateToken = async (request: Request, response: Response, next: NextFunction) => {
-
     const noAuthRoutes = [
-        "/usuarios/login",
-        "/usuarios/auth",
-        "/usuarios/login-user-client",
-        "/passageiro-embarque/embarque-qrcode",
-        "/reserva/efetiva-reserva",
-        "/reserva/efetiva-reserva-pagbank"
-    ]
+        '/health'
+    ];
+
+    const isPublic = noAuthRoutes.some(path => request.path.startsWith(path));
+    if (isPublic) return next();
 
     const authHeader = request.headers['authorization'];
-
     if (!authHeader) {
-        let access = false
-        noAuthRoutes.map(path => {
-
-            if (request.path.startsWith(path)) {
-                access = true
-            }
-
-            if (request.path.includes('images')) {
-                access = true
-            }
-
-        })
-
-        if (!access) {
-            return response.sendStatus(401)
-        }
-        return next()
+        return response.status(401).json({ error: 'Missing Authorization header' });
     }
 
-    // const user = await authService.verifyToken(authHeader);
+    if (authHeader.startsWith('Basic ')) {
+        const base64Credentials = authHeader.split(' ')[1];
+        const credentials = Buffer.from(base64Credentials, 'base64').toString('utf8');
+        const [username, password] = credentials.split(':');
 
-    // if (!user) {
-    //     response.sendStatus(401)
-    //     return null
-    // }
+        const BASIC_USER = process.env.BASIC_USER || '';
+        const BASIC_PASS = process.env.BASIC_PASS || '';
 
-    // request.headers = {
-    //     ...request.headers,
-    //     user: JSON.stringify(user.user)
-    // }
+        if (username === BASIC_USER && password === BASIC_PASS) {
+            return next();
+        }
 
-    next()
-}
+        return response.status(401).json({ error: 'Invalid Basic Auth credentials' });
+    }
 
-export { authenticateToken }
+
+    return response.status(401).json({ error: 'Invalid authentication type' });
+};
+
+export { authenticateToken };

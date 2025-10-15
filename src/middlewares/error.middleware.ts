@@ -7,13 +7,13 @@ const warning = (error: Error, _request: Request, response: Response, _next: Nex
 
     const newLogger = {
         transactionId: crypto.randomUUID(),
-        service: "API Record",
+        service: "API",
         payload: null,
         cacheHit: false,
         operation: null,
         code: 500,
         message: ["Ocorreu um erro desconhecido. Tente novamente mais tarde."],
-        errorMessage: "Error 'unknown' in API Record",
+        errorMessage: "Error 'unknown' in API",
         stack: null
     }
 
@@ -35,13 +35,6 @@ const warning = (error: Error, _request: Request, response: Response, _next: Nex
 
     if (newLogger.code >= 500 && newLogger.code < 600) {
         logger.error(newLogger)
-    }
-
-    if (error.name === "PrismaClientInitializationError") {
-        Object.assign(newLogger, {
-            message: ["Ops! Estamos com problemas técnicos. Tente novamente mais tarde ou contate nosso suporte."],
-            errorMessage: error.message
-        })
     }
 
     return response.status(newLogger.code).json({

@@ -9,9 +9,5 @@ export const checkError = ({ error, defaultMessage, defaultCode }: {
         throw new Warning(error.message, error.code)
     }
 
-    if (error instanceof Error && error.name === "PrismaClientInitializationError") {
-        throw new Warning("Ops! Estamos com problemas técnicos. Tente novamente mais tarde ou contate nosso suporte.", 400)
-    }
-
     throw new Warning(defaultMessage, defaultCode)
 }

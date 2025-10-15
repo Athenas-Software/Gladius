@@ -7,6 +7,7 @@ import { warning } from './middlewares/error.middleware';
 import './shared/container'
 import { router } from './routes';
 import cors from 'cors'
+import { authenticateToken } from './middlewares/authentication.middleware';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,7 +30,7 @@ app.use(express.json());
 process.env.TZ = "America/Sao_Paulo";
 
 app.use(express.json({ limit: "50mb" }))
-// app.use(authenticateToken)
+app.use(authenticateToken)
 app.use(router)
 app.use(warning)
 
