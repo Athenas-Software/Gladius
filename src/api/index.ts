@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 
 export const createApiClient = (baseURL: string, sub: string): AxiosInstance => {
     return axios.create({
-        baseURL,
+        baseURL: 'http://host.docker.internal/apix/',
         headers: {
             "Content-Type": "application/json",
             sub: sub
