@@ -1,0 +1,7 @@
+URLAPI=http://localhost/apix/
+APIXUSER=
+APIXPASS=
+BASIC_USER=
+BASIC_PASS=
+DOCKERFILE=Dockerfile.dev
+DOMAIN=athenas.online
