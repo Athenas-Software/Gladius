@@ -1,6 +1,8 @@
 # ---------- Stage 1: Build ----------
 FROM node:18-alpine AS builder
 
+RUN echo "=============================RUNNING RIGHT DOCKERFILE============================="
+
 WORKDIR /app
 
 COPY package*.json ./
