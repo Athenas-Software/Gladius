@@ -15,7 +15,6 @@ class ChatService implements IChat {
 
             io.emit('chat_message', data)
         } catch (error) {
-            console.log(error)
             throw new Warning(chatMessageErrors['MESSAGE_NOT_SEND'], 400);
         }
     }
