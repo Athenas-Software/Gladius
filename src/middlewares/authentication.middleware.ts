@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from "express";
 
 const authenticateToken = async (request: Request, response: Response, next: NextFunction) => {
     const noAuthRoutes = [
-        '/health'
+        '/health',
+        '/chat/webhook-sendgrid'
     ];
 
     const isPublic = noAuthRoutes.some(path => request.path.startsWith(path));

@@ -1,5 +1,6 @@
 export interface IChat {
-    createMessage(data: IChatDTO, baseUrl: string, sub: string): Promise<void>
+    createMessage(data: IChatDTO, baseUrl: string, sub: string): Promise<string>
+    webhookSendgrid(data: ISendGridDTO): Promise<string>
 }
 
 export interface IChatDTO {
@@ -8,4 +9,9 @@ export interface IChatDTO {
     usoreg?: number
     tipo: number
     codigochat: number
+}
+
+export interface ISendGridDTO {
+    email: string
+    subject: string
 }
