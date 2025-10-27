@@ -18,8 +18,9 @@
     "axios": "^1.12.2",
     "class-validator": "^0.14.2",
     "dotenv": "^17.2.3",
-    "empress": "^0.0.2",
+    "empress": "^0.0.0",
     "express": "^5.1.0",
+    "quoted-printable": "^1.0.1",
     "reflect-metadata": "^0.2.2",
     "socket.io": "^4.8.1",
     "tsyringe": "^4.10.0",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.7.2",
+    "@types/quoted-printable": "^1.0.2",
     "@types/reflect-metadata": "^0.1.0",
     "@types/socket.io": "^3.0.2",
     "nodemon": "^3.1.10",
