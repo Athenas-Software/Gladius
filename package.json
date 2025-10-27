@@ -20,6 +20,7 @@
     "dotenv": "^17.2.3",
     "empress": "^0.0.0",
     "express": "^5.1.0",
+    "multer": "^2.0.2",
     "quoted-printable": "^1.0.1",
     "reflect-metadata": "^0.2.2",
     "socket.io": "^4.8.1",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
     "@types/node": "^24.7.2",
     "@types/quoted-printable": "^1.0.2",
     "@types/reflect-metadata": "^0.1.0",
