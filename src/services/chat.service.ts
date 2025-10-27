@@ -31,7 +31,7 @@ class ChatService implements IChat {
       const message = extractPlainTextFromMime(data.email)
 
       if (header.subdomain && header.codigoChat) {
-        const request = createApiClient('https://carlos-local.athenas.com.br/apix/', 'localhost')
+        const request = createApiClient(process.env.URLAPI || '', 'localhost')
 
         await request.post('Tarefas/Chat/message', {
           codigoChat: parseInt(header.codigoChat),
