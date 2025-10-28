@@ -42,7 +42,8 @@ class ChatService implements IChat {
           assunto: data.subject,
           message,
           tipo: 4,
-          usoreg: 1
+          usoreg: 1,
+          anexos: parsed.attachments
         })
 
         io.emit('chat_message', {
