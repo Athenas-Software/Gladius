@@ -4,12 +4,14 @@ import { io } from "../socket"
 import { Warning } from "../errors"
 import { chatMessageErrors, chatMessageSuccess } from "../shared/helper/error.messages"
 import { extractPlainTextFromMime, extractTrackingFromSubject } from "../shared/helper/sendgrid"
+import { simpleParser, Attachment } from "mailparser";
 
 class ChatService implements IChat {
 
   createMessage = async (data: IChatDTO, baseUrl: string, sub: string): Promise<string> => {
 
     try {
+
       const request = createApiClient(baseUrl, sub)
 
       await request.post('Tarefas/Chat/message', data)
@@ -25,6 +27,8 @@ class ChatService implements IChat {
   webhookSendgrid = async (data: ISendGridDTO): Promise<string> => {
 
     try {
+
+      const parsed = await simpleParser(data.email);
 
       const header = extractTrackingFromSubject(data.subject)
 
