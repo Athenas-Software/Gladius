@@ -2,9 +2,9 @@ services:
   gladius:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ${DOCKERFILE}
     ports:
-      - "80:3000"
+      - "${PORT}:3000"
       - "9229:9229"
     environment:
       - NODE_ENV=development
@@ -24,3 +24,5 @@ services:
 networks:
   gladius-network:
     driver: bridge
+    external: true
+      

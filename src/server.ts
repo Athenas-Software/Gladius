@@ -26,7 +26,6 @@ app.use(cors({
 }));
 
 
-app.use(express.json());
 process.env.TZ = "America/Sao_Paulo";
 
 app.use(express.json({ limit: "50mb" }))
