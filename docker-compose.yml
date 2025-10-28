@@ -24,5 +24,4 @@ services:
 networks:
   gladius-network:
     driver: bridge
-    external: true
       
